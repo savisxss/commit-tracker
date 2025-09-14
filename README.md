@@ -14,7 +14,7 @@ A modern web application for tracking Git commits across multiple repositories. 
 ## Architecture
 
 - **Backend**: Node.js + Express + MongoDB
-- **Frontend**: React with modern CSS
+- **Frontend**: Vue 3 with Composition API + Vite
 - **Integration**: GitHub Webhooks for automatic commit tracking
 - **Deployment**: Docker Compose with Nginx reverse proxy
 
@@ -46,7 +46,13 @@ docker-compose up --build
 
 1. Install dependencies:
 ```bash
-npm run install-all
+# Backend dependencies
+cd server
+npm install
+
+# Frontend dependencies
+cd ../client
+npm install
 ```
 
 2. Set up environment variables:
@@ -58,6 +64,12 @@ cp .env.example .env
 
 3. Start the application:
 ```bash
+# Terminal 1: Start backend server
+cd server
+npm run dev
+
+# Terminal 2: Start frontend development server
+cd client
 npm run dev
 ```
 
@@ -118,10 +130,13 @@ BASE_URL=https://your-domain.com
 
 ```
 commit-tracker/
-├── client/          # React frontend
+├── client/          # Vue 3 frontend
 │   ├── src/
-│   │   ├── pages/   # Application pages
-│   │   └── App.js   # Main application component
+│   │   ├── pages/   # Vue pages/components
+│   │   ├── App.vue  # Main Vue component
+│   │   └── main.js  # Vue entry point
+│   ├── vite.config.js # Vite configuration
+│   └── package.json
 ├── server/          # Express backend
 │   ├── models/      # MongoDB models
 │   ├── routes/      # API route handlers
@@ -133,8 +148,20 @@ commit-tracker/
 
 1. Backend: Add new endpoints in `server/routes/`
 2. Database: Create models in `server/models/`
-3. Frontend: Add components in `client/src/`
-4. Update routing in `client/src/App.js`
+3. Frontend: Add Vue components in `client/src/`
+4. Update routing in `client/src/main.js`
+
+### Frontend Development
+
+The frontend is built with:
+- **Vue 3** with Composition API
+- **Vue Router 4** for client-side routing
+- **Vite** for fast development and building
+- **Heroicons Vue** for icons
+- **Vue Toastification** for notifications
+- **Axios** for HTTP requests
+
+Development server runs on `http://localhost:3001` (or next available port) with hot module replacement.
 
 ### Database Schema
 
